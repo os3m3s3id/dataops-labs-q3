@@ -10,3 +10,11 @@ docker compose run --rm dbt seed --profiles-dir .
 
 
 docker compose run --rm dbt run --select stg_customers
+
+Generating Report:
+
+1. docker compose run --rm dbt docs generate
+
+2. cd C:\Users\osamasaid\Desktop\dataops-labs-q3\dbt_learning\target (Where the catalog.json is)
+
+3. python -m http.server 8081

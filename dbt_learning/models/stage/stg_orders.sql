@@ -16,6 +16,29 @@ cleaned as (
         trim(currency) as currency
     from source
 
+),
+
+deduped as (
+
+    select
+        *,
+        row_number() over (
+            partition by order_id
+            order by
+                case when order_status = 'completed' then 1 else 2 end,
+                order_date
+        ) as rn
+    from cleaned
+
 )
 
-select * from cleaned
+select
+    order_id,
+    customer_id,
+    order_date,
+    order_status,
+    store_id,
+    shipping_fee,
+    currency
+from deduped
+where rn = 1
