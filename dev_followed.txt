@@ -6,3 +6,7 @@ and what i did is I compose up the dbt image to be in the same network and i run
 
 Commands related:
 docker compose run --rm dbt seed --profiles-dir .
+
+
+
+docker compose run --rm dbt run --select stg_customers
