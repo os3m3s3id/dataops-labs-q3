@@ -43,3 +43,8 @@ models:
 snapshots:
   dbt_learning:
     +target_schema: RAW
+
+
+data_tests:
+  dbt_learning:
+    +store_failures: true
