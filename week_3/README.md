@@ -110,7 +110,11 @@ deduped as (
 
 **Deliverable:** a fixed `stg_orders`. After the fix:
 *   the `unique` test on `order_id` passes,
+<<<<<<< HEAD
 *   `fct_order_items` = **313 rows** and `fct_orders` = **155 rows**.
+=======
+*   `fct_order_items` = **313 rows**.
+>>>>>>> upstream/main
 
 ### Task 3.4 — Store the Failures (15 pts)
 A failing test tells you *how many* rows are bad, but not *which* ones. Turn on **`store_failures`** so dbt saves each failing test's rows into a table you can query.

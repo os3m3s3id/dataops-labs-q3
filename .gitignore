@@ -41,9 +41,14 @@ assignments_and_evaluation.md
 # are assigned to create and commit in their own forks.
 answer_key/
 
+<<<<<<< HEAD
 # Mentor-only: only Weeks 1-3 are released to mentees for now. Later weeks stay
 # local until it's time to hand them out.
 week_4/
+=======
+# Mentor-only: only Weeks 1-4 are released to mentees for now. Later weeks stay
+# local until it's time to hand them out.
+>>>>>>> upstream/main
 week_5/
 week_6/
 

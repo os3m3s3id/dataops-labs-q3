@@ -339,8 +339,7 @@ def grade_week_3():
     stg_orders = file_exists(os.path.join(STAGE_DIR, "stg_orders.sql")) or ""
     checks.append(("3.3", *check_text_contains(
         stg_orders, r"row_number\s*\(\s*\)|distinct", "stg_orders deduplicates (row_number/distinct)"), 15))
-    checks.append(("3.3", *check_model_rows(results, "fct_order_items", 313, "fct_order_items = 313 rows"), 5))
-    checks.append(("3.3", *check_model_rows(results, "fct_orders", 155, "fct_orders = 155 rows"), 5))
+    checks.append(("3.3", *check_model_rows(results, "fct_order_items", 313, "fct_order_items = 313 rows"), 10))
 
     # ── Task 3.4: Store Test Failures (15 pts) ──────────────
     # store_failures may be set per-test in schema.yml or project-wide in
@@ -388,12 +387,12 @@ def grade_week_4():
     checks.append(("4.2", *check_dbt_result(results, "fct_order_items", "fct_order_items still builds"), 15))
 
     # ── Task 4.3: Build fct_orders (20 pts) ─────────────────
-    checks.append(("4.3", *check_file_exists(orders, "fct_orders.sql exists"), 5))
     rollup = re.search(r"group\s+by", orders_c, re.IGNORECASE) and re.search(r"sum\s*\(", orders_c, re.IGNORECASE)
     checks.append(("4.3", bool(rollup),
                    "✅ fct_orders rolls up (group by + sum)" if rollup
                    else "❌ fct_orders needs group by + sum() rollup", 10))
     checks.append(("4.3", *check_text_contains(orders_c, r"order_total", "Has order_total (net + shipping)"), 5))
+    checks.append(("4.3", *check_model_rows(results, "fct_orders", 155, "fct_orders = 155 rows"), 5))
 
     return render(report, checks)
 
