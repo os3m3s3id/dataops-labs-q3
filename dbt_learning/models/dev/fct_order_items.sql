@@ -63,9 +63,9 @@ final as (
         cost_price,
         quantity * unit_price as gross_amount,
         quantity * unit_price * discount_pct / 100 as discount_amount,
-        quantity * unit_price * (1 - discount_pct / 100) as net_amount,
+        {{ net_amount('quantity', 'unit_price', 'discount_pct') }} as net_amount,
         quantity * cost_price as total_cost,
-        (quantity * unit_price * (1 - discount_pct / 100)) - (quantity * cost_price) as margin
+        {{ net_amount('quantity', 'unit_price', 'discount_pct') }} - (quantity * cost_price) as margin
     from joined
 
 )
