@@ -1,7 +1,8 @@
 ---This changes the behavior of the table instead of dropping and build again it just insert new rows and merge (If not exist) or update (if exist)
 {{ config(
     materialized='incremental',
-    unique_key='order_item_id'
+    unique_key='order_item_id',
+    post_hook="create index if not exists idx_fct_order_items_order_id on {{ this }} (order_id)"
 ) }}
 
 

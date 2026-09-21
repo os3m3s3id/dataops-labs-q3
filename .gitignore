@@ -42,6 +42,7 @@ assignments_and_evaluation.md
 answer_key/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Mentor-only: only Weeks 1-3 are released to mentees for now. Later weeks stay
 # local until it's time to hand them out.
 week_4/
@@ -54,5 +55,12 @@ week_6/
 
 # Airflow is a Week 6 topic — keep it hidden until then.
 airflow/dags/dbt_pipeline.py
+=======
+# Mentor-only notes drafted for an earlier Week 6 design, not part of the
+# released assignment. (All six weeks are now released.)
+>>>>>>> upstream/main
 dbt_learning/docs/airflow_overview.md
 dbt_learning/docs/pipeline_retrospective.md
+
+# Local-only Claude Code instructions
+CLAUDE.md

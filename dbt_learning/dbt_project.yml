@@ -38,6 +38,7 @@ models:
     dev:
       +schema: DEV
       +materialized: table
+      +post-hook: "GRANT SELECT ON {{ this }} TO PUBLIC;"
 
 # ── Snapshots ─────────────────────────────────────────────────
 snapshots:
