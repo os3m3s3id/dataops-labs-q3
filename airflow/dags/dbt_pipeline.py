@@ -9,6 +9,7 @@ Orchestrates the dbt pipeline on a schedule:
       -> dbt_test_stage
       -> dbt_run_dev
       -> dbt_test_dev
+      -> dbt_build
 
 Each task is a BashOperator that runs `dbt` directly. dbt is installed in
 the Airflow image (see Dockerfile.airflow) and the dbt project is mounted at
@@ -29,10 +30,10 @@ from airflow.operators.bash import BashOperator
 DBT_DIR = "/opt/airflow/dbt"
 
 default_args = {
-    "owner": "student_name",          # ← replace with your name
+    "owner": "Osama",          # ← replace with your name
     "depends_on_past": False,
-    # TODO (Task 6.3): give every task two retries, five minutes apart.
-    #   `timedelta` is already imported above.
+    "retries": 2,
+    "retry_delay": timedelta(minutes=5),
 }
 
 
@@ -51,7 +52,7 @@ with DAG(
     default_args=default_args,
     start_date=datetime(2026, 9, 1),
     schedule="0 6 * * *",             # daily at 06:00 UTC (Airflow cron is UTC)
-    # TODO (Task 6.3): stop Airflow backfilling every run since start_date.
+    catchup=False,
     tags=["dbt", "dataops"],
 ) as dag:
 
@@ -61,6 +62,7 @@ with DAG(
     dbt_test_stage = dbt_task(dag, "dbt_test_stage", "test --select stage")
     dbt_run_dev = dbt_task(dag, "dbt_run_dev", "run --select dev")
     dbt_test_dev = dbt_task(dag, "dbt_test_dev", "test --select dev")
+    dbt_build = dbt_task(dag, "dbt_build", "build")
 
     # TODO (Task 6.2): add a task that runs `dbt build`, then wire it onto the
     #   end of the chain below with `>>`.
@@ -73,4 +75,5 @@ with DAG(
         >> dbt_test_stage
         >> dbt_run_dev
         >> dbt_test_dev
+        >> dbt_build
     )
